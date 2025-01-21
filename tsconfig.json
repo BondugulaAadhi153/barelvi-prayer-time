@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "./build", // Outputs compiled files to the build folder
+    "rootDir": "./src", // The source folder for your TypeScript files
+    "target": "ES6", // Specifies the output JavaScript version
+    "module": "CommonJS", // Specifies the module system
+    "strict": true, // Enables strict type-checking options
+    "esModuleInterop": true, // Allows default imports from CommonJS modules
+    "skipLibCheck": true // Skips type checking of declaration files
+  },
+  "include": ["src/**/*.ts"], // Includes all .ts files in the src folder
+  "exclude": ["node_modules"] // Excludes node_modules folder
+}
