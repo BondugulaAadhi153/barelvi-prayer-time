@@ -12,8 +12,11 @@
   "devDependencies": {
     "typescript": "^5.7.2"
   },
-    "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@bondugula_aadhi"
+  {
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
+}
+
 }
                                                                                                                                                                                    
