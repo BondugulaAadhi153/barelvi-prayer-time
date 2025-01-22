@@ -9,29 +9,23 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org/  # Set to npm public registry
+          registry-url: https://registry.npmjs.org/
 
-      # Step 3: Authenticate with GitHub npm registry (using GitHub token)
       - name: Authenticate with GitHub npm registry
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.MY_GITHUB_TOKEN }}" > ~/.npmrc  # Updated secret name
 
-      # Step 4: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 5: Build the package
       - name: Build package
         run: npm run build
 
-      # Step 6: Publish to GitHub Packages (not npm public registry)
-      - name: Publish to GitHub Packages
-        run: npm publish --registry=https://npm.pkg.github.com
+      - name: Publish to npm
+        run: npm publish
