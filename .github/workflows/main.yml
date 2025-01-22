@@ -18,11 +18,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org/  # Set to npm public registry
 
-      # Step 3: Authenticate with npm (hardcoded token)
-      - name: Authenticate with npm
-        run: echo "//registry.npmjs.org/:_authToken=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" > ~/.npmrc
+      # Step 3: Authenticate with GitHub npm registry (using GitHub token)
+      - name: Authenticate with GitHub npm registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
       # Step 4: Install dependencies
       - name: Install dependencies
@@ -32,6 +32,6 @@ jobs:
       - name: Build package
         run: npm run build
 
-      # Step 6: Publish to npm
-      - name: Publish to npm
-        run: npm publish
+      # Step 6: Publish to GitHub Packages (not npm public registry)
+      - name: Publish to GitHub Packages
+        run: npm publish --registry=https://npm.pkg.github.com
