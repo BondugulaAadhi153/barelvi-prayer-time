@@ -1,0 +1,37 @@
+name: Publish to npm on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      # Step 3: Authenticate with npm (hardcoded token)
+      - name: Authenticate with npm
+        run: echo "//registry.npmjs.org/:_authToken=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" > ~/.npmrc
+
+      # Step 4: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 5: Build the package
+      - name: Build package
+        run: npm run build
+
+      # Step 6: Publish to npm
+      - name: Publish to npm
+        run: npm publish
